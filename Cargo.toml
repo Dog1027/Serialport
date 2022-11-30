@@ -1,0 +1,16 @@
+[package]
+name = "serial_port_rs"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tokio = { version = "1.14.0", features = ["full"] }
+tokio-serial = "5.4.1"
+crossterm = "0.25.0"
+clap = { version = "4.0.29", features = ["derive"] }
+# tokio-util = {version = "0.6.9", features = ["codec"]}
+# bytes = "1.1.0"
+# futures = "0.3.18"
+# futures-util = "0.3.18"
