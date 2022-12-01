@@ -9,3 +9,4 @@ Options:
   -h, --help                 Print help information
   -V, --version              Print version information
 ```
+`Ctrl + A`: 退出程式

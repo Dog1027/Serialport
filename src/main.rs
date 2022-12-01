@@ -52,6 +52,7 @@ fn print_events(tx: sync::mpsc::UnboundedSender<u8>) -> Result<()> {
                                 tx.send(21u8).unwrap();
                             }
                             KeyCode::Char('a') => {
+                                drop(tx);
                                 break;
                             },
                             _ => {
@@ -161,10 +162,10 @@ async fn main() {
     };
 
 
-    let mut port = tokio_serial::new(port_name, baud_rate).open_native_async().unwrap();
+    let mut port = tokio_serial::new(&port_name, baud_rate).open_native_async().unwrap();
     let mut buf = [0u8; 32];
 
-    println!("Connected!");
+    println!("{{{}, {}}} Port Opened!", port_name, baud_rate);
 
     tokio::task::spawn_blocking(move || {
 
@@ -195,12 +196,19 @@ async fn main() {
                     }
                 }
             },
-            Some(msg) = rx.recv() => {
-                loop {
-                    if let Ok(_) = port.writable().await {
-                        if let Ok(_) = port.try_write(&mut [msg;1]) {
-                            break;
+            option = rx.recv() => {
+                match option {
+                    Some(msg) => {
+                        loop {
+                            if let Ok(_) = port.writable().await {
+                                if let Ok(_) = port.try_write(&mut [msg;1]) {
+                                    break;
+                                }
+                            }
                         }
+                    }
+                    None => {
+                        break;
                     }
                 }
             },
