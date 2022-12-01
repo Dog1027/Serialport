@@ -17,7 +17,7 @@ use clap::Parser;
 #[command(author, version, about, long_about = None)]
 struct Args {
     /// The communications port
-    #[arg(short, long, default_value_t = String::from("COM4"))]
+    #[arg(short, long, default_value_t = String::from("COM1"))]
     portname: String,
 
     /// The baud rate
