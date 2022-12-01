@@ -1,4 +1,5 @@
 # Serialport
+```
 Usage: serial_port_rs.exe [OPTIONS]
 
 Options:
@@ -7,3 +8,4 @@ Options:
   -s, --setting              Setting mode
   -h, --help                 Print help information
   -V, --version              Print version information
+```
